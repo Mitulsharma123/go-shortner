@@ -37,4 +37,20 @@ func InitializeStore() *StorageService {		//store service initilization
 }
 
 
+func SaveUrlMapping(shortUrl string, originalUrl string, userId string) {				//function for mapping bwtween short and original url
+	err := storeService.redisClient.Set(ctx, shortUrl, originalUrl, CacheDuration).Err()
+	if err != nil {
+		panic(fmt.Sprintf("Failed saving key url | Error: %v - shortUrl: %s - originalUrl: %s\n", err, shortUrl, originalUrl))
+	}
+
+}
+
+func RetrieveInitialUrl(shortUrl string) string {		//same URL returned instead of generating new url 
+										
+	result, err := storeService.redisClient.Get(ctx, shortUrl).Result()
+	if err != nil {
+		panic(fmt.Sprintf("Failed RetrieveInitialUrl url | Error: %v - shortUrl: %s\n", err, shortUrl))
+	}
+	return result
+}
 
