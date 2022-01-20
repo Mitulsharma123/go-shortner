@@ -3,8 +3,8 @@ package handler
 import (
 	"net/http"
 
-	"go-shortner/shortner"
-	"go-shortner/store"
+	"github.com/Mitulsharma123/shortner"
+	"github.com/Mitulsharma123/store"
 
 	"github.com/gin-gonic/gin"
 )
