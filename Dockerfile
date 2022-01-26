@@ -1,21 +1,19 @@
-// Start by selecting the base image for our service
-FROM golang:1.13.14-alpine3.11
-
-// Creating the `app` directory in which the app will run 
+FROM golang:latest
 RUN mkdir /app
-
-// Move everything from root to the newly created app directory
 ADD . /app
-
-// Specifying app as our work directory in which
-// futher instructions should run into
 WORKDIR /app
 
-// Download all neededed project dependencies
-RUN go mod download
+RUN export GO11MODULE=on
+RUN go get "go-shortner/shortner"
+RUN go get "go-shortner/store"
+RUN go get "github.com/gin-gonic/gin"
+RUN go get "github.com/itchyny/base58-go"
+RUN go get "github.com/stretchr/testify/assert"
+RUN go get "github.com/go-redis/redis/v8"
+RUN cd /app && git clone https://github.com/Mitulsharma123/go-shortner 
 
-// Build the project executable binary
-RUN go build -o main .
+RUN cd /app/go-shortner && go build 
 
-// Run/Starts the app executable binary
-CMD ["/app/main"]
+EXPOSE 9808
+
+CMD ["/app/go-shortner/main"]
