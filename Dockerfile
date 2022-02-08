@@ -6,6 +6,7 @@ WORKDIR /app
 RUN export GO11MODULE=on
 RUN go get "go-shortner/shortner"
 RUN go get "go-shortner/store"
+RUN go get "go-shortner/handler"
 RUN go get "github.com/gin-gonic/gin"
 RUN go get "github.com/itchyny/base58-go"
 RUN go get "github.com/stretchr/testify/assert"

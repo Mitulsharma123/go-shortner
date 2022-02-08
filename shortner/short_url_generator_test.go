@@ -21,3 +21,4 @@ func TestShortLinkGenerator(t *testing.T) {
 	assert.Equal(t, shortLink_1, "jTa4L57P")
 	assert.Equal(t, shortLink_2, "d66yfx7N")
 	assert.Equal(t, shortLink_3, "dhZTayYQ")
+}
